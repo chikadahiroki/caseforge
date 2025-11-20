@@ -1,7 +1,7 @@
 {
-  "name": "case-convert",
+  "name": "caseforge",
   "version": "0.1.0",
-  "description": "case-convertEffortlessly convert between snake_case, camelCase, and more in TypeScript.Zero dependencies, type-safe, and easy to use for any project.",
+  "description": "caseforge - Effortlessly convert between snake_case, camelCase, and more in TypeScript. Zero dependencies, type-safe, and easy to use for any project.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -20,10 +20,11 @@
   "scripts": {
     "build": "bun x tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node",
     "check": "bunx @biomejs/biome check --write src && bun x tsc --noEmit",
-    "prepublishOnly": "bun run check && bun run test && bun run build"
+    "prepublishOnly": "bun run check && bun test && bun run build"
   },
   "keywords": [
     "typescript",
+    "caseforge",
     "case-conversion",
     "camelcase",
     "snake-case",

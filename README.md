@@ -1,7 +1,7 @@
-# case-convert
+# caseforge
 
-[![CI](https://github.com/YOUR_USERNAME/case-convert/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/case-convert/actions/workflows/ci.yml)
-[![npm version](https://badge.fury.io/js/case-convert.svg)](https://www.npmjs.com/package/case-convert)
+[![CI](https://github.com/YOUR_USERNAME/caseforge/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/caseforge/actions/workflows/ci.yml)
+[![npm version](https://badge.fury.io/js/caseforge.svg)](https://www.npmjs.com/package/caseforge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > Type-safe and lightweight case conversion library for TypeScript.
@@ -17,11 +17,11 @@
 ## Installation
 
 ```bash
-npm install case-convert
+npm install caseforge
 ```
 
 ```ts
-import { toCamelCase, toSnakeCase, toKebabCase, toPascalCase } from "case-convert";
+import { toCamelCase, toSnakeCase, toKebabCase, toPascalCase } from "caseforge";
 
 // String conversion
 toCamelCase("user_name");     // => "userName"

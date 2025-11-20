@@ -1,6 +1,6 @@
 import { PATTERNS } from "@/utils/patterns";
 import { transformObject } from "@/utils/transform";
-import { isString } from "@/utils/typeGuards";
+import { isObject, isString } from "@/utils/typeGuards";
 
 /**
  * Converts a string to kebab-case format at the type level.
@@ -54,8 +54,12 @@ export function toKebabCase<T extends string>(input: T): KebabCase<T>;
 export function toKebabCase<T extends Record<string, unknown>>(
 	input: T,
 ): KebabCaseKeys<T>;
-export function toKebabCase(input: string | Record<string, unknown>) {
-	return isString(input)
-		? kebabCaseString(input)
-		: transformObject(input, kebabCaseString);
+export function toKebabCase(input: unknown) {
+	if (isString(input)) {
+		return kebabCaseString(input);
+	}
+	if (isObject(input)) {
+		return transformObject(input, kebabCaseString);
+	}
+	return input;
 }

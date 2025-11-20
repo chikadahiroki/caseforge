@@ -24,7 +24,10 @@
   "scripts": {
     "build": "bun x tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node",
     "check": "bunx @biomejs/biome check --write src && bun x tsc --noEmit",
-    "prepublishOnly": "bun run check && bun test && bun run build"
+    "prepublishOnly": "bun run check && bun test && bun run build",
+    "release:patch": "npm version patch && git push && git push --tags && npm publish",
+    "release:minor": "npm version minor && git push && git push --tags && npm publish",
+    "release:major": "npm version major && git push && git push --tags && npm publish"
   },
   "keywords": [
     "typescript",

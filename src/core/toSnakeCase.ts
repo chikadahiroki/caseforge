@@ -54,6 +54,7 @@ export function toSnakeCase<T extends string>(input: T): SnakeCase<T>;
 export function toSnakeCase<T extends Record<string, unknown>>(
 	input: T,
 ): SnakeCaseKeys<T>;
+export function toSnakeCase<T>(input: T): T;
 export function toSnakeCase(input: unknown) {
 	if (isString(input)) {
 		return snakeCaseString(input);

@@ -49,6 +49,7 @@ export function toPascalCase<T extends string>(input: T): PascalCase<T>;
 export function toPascalCase<T extends Record<string, unknown>>(
 	input: T,
 ): PascalCaseKeys<T>;
+export function toPascalCase<T>(input: T): T;
 export function toPascalCase(input: unknown) {
 	if (isString(input)) {
 		return pascalCaseString(input);

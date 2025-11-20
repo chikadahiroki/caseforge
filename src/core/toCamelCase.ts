@@ -47,6 +47,7 @@ export function toCamelCase<T extends string>(input: T): CamelCase<T>;
 export function toCamelCase<T extends Record<string, unknown>>(
 	input: T,
 ): CamelCaseKeys<T>;
+export function toCamelCase<T>(input: T): T;
 export function toCamelCase(input: unknown) {
 	if (isString(input)) {
 		return camelCaseString(input);

@@ -54,6 +54,7 @@ export function toKebabCase<T extends string>(input: T): KebabCase<T>;
 export function toKebabCase<T extends Record<string, unknown>>(
 	input: T,
 ): KebabCaseKeys<T>;
+export function toKebabCase<T>(input: T): T;
 export function toKebabCase(input: unknown) {
 	if (isString(input)) {
 		return kebabCaseString(input);

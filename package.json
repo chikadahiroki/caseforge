@@ -30,7 +30,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "bun x tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node --minify --sourcemap=external",
+    "build": "bun x tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node --minify",
     "check": "bunx @biomejs/biome check --write src && bun x tsc --noEmit",
     "prepublishOnly": "bun run check && bun test && bun run build",
     "release:patch:auto": "npm version patch && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",

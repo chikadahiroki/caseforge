@@ -4,6 +4,14 @@
   "description": "caseforge - Effortlessly convert between snake_case, camelCase, and more in TypeScript. Zero dependencies, type-safe, and easy to use for any project.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chikadahiroki/caseforge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chikadahiroki/caseforge/issues"
+  },
+  "homepage": "https://github.com/chikadahiroki/caseforge#readme",
   "exports": {
     ".": {
       "import": {

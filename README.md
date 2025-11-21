@@ -1,6 +1,5 @@
 # caseforge
 
-[![CI](https://github.com/YOUR_USERNAME/caseforge/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/caseforge/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/caseforge.svg)](https://www.npmjs.com/package/caseforge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

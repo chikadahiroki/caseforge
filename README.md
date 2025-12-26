@@ -20,13 +20,14 @@ npm install caseforge
 ```
 
 ```ts
-import { toCamelCase, toSnakeCase, toKebabCase, toPascalCase } from "caseforge";
+import { toCamelCase, toSnakeCase, toKebabCase, toPascalCase, toUpperCase } from "caseforge";
 
 // String conversion
 toCamelCase("user_name");     // => "userName"
 toSnakeCase("userName");       // => "user_name"
 toKebabCase("userName");       // => "user-name"
 toPascalCase("user_name");     // => "UserName"
+toUpperCase("userName");       // => "USER_NAME"
 
 // Object conversion with type inference
 const apiResponse = {

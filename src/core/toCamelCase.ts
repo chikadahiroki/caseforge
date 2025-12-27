@@ -16,12 +16,12 @@ type CamelCase<S extends string> = S extends `${infer A}_${infer B}`
  * Converts all object keys to camelCase format at the type level.
  * @example { user_name: "John Doe" } -> { userName: "John Doe" }
  */
-type CamelCaseKeys<T> = {
-	[K in keyof T as CamelCase<K & string>]: T[K] extends Array<infer U>
-		? U extends Record<string, unknown>
-			? Array<CamelCaseKeys<U>>
+export type CamelCaseKeys<T> = {
+	[K in keyof T as CamelCase<K & string>]: T[K] extends readonly (infer U)[]
+		? U extends object
+			? readonly CamelCaseKeys<U>[]
 			: T[K]
-		: T[K] extends Record<string, unknown>
+		: T[K] extends object
 			? CamelCaseKeys<T[K]>
 			: T[K];
 };
@@ -44,11 +44,8 @@ function camelCaseString(str: string): string {
  * @returns The camelCase string or object.
  */
 export function toCamelCase<T extends string>(input: T): CamelCase<T>;
-export function toCamelCase<T extends Record<string, unknown>>(
-	input: T,
-): CamelCaseKeys<T>;
-export function toCamelCase<T>(input: T): T;
-export function toCamelCase(input: unknown) {
+export function toCamelCase<T extends object>(input: T): CamelCaseKeys<T>;
+export function toCamelCase(input: unknown): unknown {
 	if (isString(input)) {
 		return camelCaseString(input);
 	}

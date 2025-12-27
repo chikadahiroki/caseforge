@@ -24,11 +24,11 @@ type UpperCase<
  * @example { userName: "John Doe" } -> { USER_NAME: "John Doe" }
  */
 type UpperCaseKeys<T> = {
-	[K in keyof T as UpperCase<K & string>]: T[K] extends Array<infer U>
-		? U extends Record<string, unknown>
-			? Array<UpperCaseKeys<U>>
+	[K in keyof T as UpperCase<K & string>]: T[K] extends readonly (infer U)[]
+		? U extends object
+			? readonly UpperCaseKeys<U>[]
 			: T[K]
-		: T[K] extends Record<string, unknown>
+		: T[K] extends object
 			? UpperCaseKeys<T[K]>
 			: T[K];
 };
@@ -52,11 +52,8 @@ function upperCaseString(str: string): string {
  * @returns The UPPER_SNAKE_CASE string or object.
  */
 export function toUpperCase<T extends string>(input: T): UpperCase<T>;
-export function toUpperCase<T extends Record<string, unknown>>(
-	input: T,
-): UpperCaseKeys<T>;
-export function toUpperCase<T>(input: T): T;
-export function toUpperCase(input: unknown) {
+export function toUpperCase<T extends object>(input: T): UpperCaseKeys<T>;
+export function toUpperCase(input: unknown): unknown {
 	if (isString(input)) {
 		return upperCaseString(input);
 	}

@@ -23,12 +23,12 @@ type KebabCase<
  * Converts all object keys to kebab-case format at the type level.
  * @example { userName: "John Doe" } -> { "user-name": "John Doe" }
  */
-type KebabCaseKeys<T> = {
-	[K in keyof T as KebabCase<K & string>]: T[K] extends Array<infer U>
-		? U extends Record<string, unknown>
-			? Array<KebabCaseKeys<U>>
+export type KebabCaseKeys<T> = {
+	[K in keyof T as KebabCase<K & string>]: T[K] extends readonly (infer U)[]
+		? U extends object
+			? readonly KebabCaseKeys<U>[]
 			: T[K]
-		: T[K] extends Record<string, unknown>
+		: T[K] extends object
 			? KebabCaseKeys<T[K]>
 			: T[K];
 };
@@ -51,11 +51,8 @@ function kebabCaseString(str: string): string {
  * @returns The kebab-case string or object.
  */
 export function toKebabCase<T extends string>(input: T): KebabCase<T>;
-export function toKebabCase<T extends Record<string, unknown>>(
-	input: T,
-): KebabCaseKeys<T>;
-export function toKebabCase<T>(input: T): T;
-export function toKebabCase(input: unknown) {
+export function toKebabCase<T extends object>(input: T): KebabCaseKeys<T>;
+export function toKebabCase(input: unknown): unknown {
 	if (isString(input)) {
 		return kebabCaseString(input);
 	}

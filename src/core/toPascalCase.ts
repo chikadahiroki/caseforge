@@ -19,11 +19,11 @@ type PascalCase<S extends string> = S extends `${infer Head}_${infer Tail}`
  * @example { user_name: "John Doe" } -> { UserName: "John Doe" }
  */
 type PascalCaseKeys<T> = {
-	[K in keyof T as PascalCase<K & string>]: T[K] extends Array<infer U>
-		? U extends Record<string, unknown>
-			? Array<PascalCaseKeys<U>>
+	[K in keyof T as PascalCase<K & string>]: T[K] extends readonly (infer U)[]
+		? U extends object
+			? readonly PascalCaseKeys<U>[]
 			: T[K]
-		: T[K] extends Record<string, unknown>
+		: T[K] extends object
 			? PascalCaseKeys<T[K]>
 			: T[K];
 };
@@ -46,11 +46,8 @@ function pascalCaseString(str: string): string {
  * @returns The PascalCase string or object.
  */
 export function toPascalCase<T extends string>(input: T): PascalCase<T>;
-export function toPascalCase<T extends Record<string, unknown>>(
-	input: T,
-): PascalCaseKeys<T>;
-export function toPascalCase<T>(input: T): T;
-export function toPascalCase(input: unknown) {
+export function toPascalCase<T extends object>(input: T): PascalCaseKeys<T>;
+export function toPascalCase(input: unknown): unknown {
 	if (isString(input)) {
 		return pascalCaseString(input);
 	}

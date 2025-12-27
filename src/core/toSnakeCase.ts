@@ -24,11 +24,11 @@ type SnakeCase<
  * @example { userName: "John Doe" } -> { user_name: "John Doe" }
  */
 type SnakeCaseKeys<T> = {
-	[K in keyof T as SnakeCase<K & string>]: T[K] extends Array<infer U>
-		? U extends Record<string, unknown>
-			? Array<SnakeCaseKeys<U>>
+	[K in keyof T as SnakeCase<K & string>]: T[K] extends readonly (infer U)[]
+		? U extends object
+			? readonly SnakeCaseKeys<U>[]
 			: T[K]
-		: T[K] extends Record<string, unknown>
+		: T[K] extends object
 			? SnakeCaseKeys<T[K]>
 			: T[K];
 };
@@ -51,11 +51,8 @@ function snakeCaseString(str: string): string {
  * @returns The snake_case string or object.
  */
 export function toSnakeCase<T extends string>(input: T): SnakeCase<T>;
-export function toSnakeCase<T extends Record<string, unknown>>(
-	input: T,
-): SnakeCaseKeys<T>;
-export function toSnakeCase<T>(input: T): T;
-export function toSnakeCase(input: unknown) {
+export function toSnakeCase<T extends object>(input: T): SnakeCaseKeys<T>;
+export function toSnakeCase(input: unknown): unknown {
 	if (isString(input)) {
 		return snakeCaseString(input);
 	}

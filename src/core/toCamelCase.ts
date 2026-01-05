@@ -16,7 +16,7 @@ type CamelCase<S extends string> = S extends `${infer A}_${infer B}`
  * Converts all object keys to camelCase format at the type level.
  * @example { user_name: "John Doe" } -> { userName: "John Doe" }
  */
-export type CamelCaseKeys<T> = {
+type CamelCaseKeys<T> = {
 	[K in keyof T as CamelCase<K & string>]: T[K] extends readonly (infer U)[]
 		? U extends object
 			? readonly CamelCaseKeys<U>[]

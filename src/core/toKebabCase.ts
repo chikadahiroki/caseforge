@@ -23,7 +23,7 @@ type KebabCase<
  * Converts all object keys to kebab-case format at the type level.
  * @example { userName: "John Doe" } -> { "user-name": "John Doe" }
  */
-export type KebabCaseKeys<T> = {
+type KebabCaseKeys<T> = {
 	[K in keyof T as KebabCase<K & string>]: T[K] extends readonly (infer U)[]
 		? U extends object
 			? readonly KebabCaseKeys<U>[]

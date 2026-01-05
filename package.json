@@ -1,6 +1,6 @@
 {
   "name": "caseforge",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "caseforge - Effortlessly convert between snake_case, camelCase, and more in TypeScript. Zero dependencies, type-safe, and easy to use for any project.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

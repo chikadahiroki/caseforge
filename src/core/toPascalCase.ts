@@ -47,7 +47,9 @@ function pascalCaseString(str: string): string {
  * @returns The PascalCase string or object.
  */
 export function toPascalCase<T extends string>(input: T): PascalCase<T>;
-export function toPascalCase<T extends object>(input: readonly T[]): PascalCaseKeys<T>[];
+export function toPascalCase<T extends object>(
+	input: readonly T[],
+): PascalCaseKeys<T>[];
 export function toPascalCase<T extends object>(input: T): PascalCaseKeys<T>;
 export function toPascalCase(input: unknown): unknown {
 	if (isString(input)) {

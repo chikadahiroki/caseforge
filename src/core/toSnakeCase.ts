@@ -51,7 +51,9 @@ function snakeCaseString(str: string): string {
  * @returns The snake_case string or object.
  */
 export function toSnakeCase<T extends string>(input: T): SnakeCase<T>;
-export function toSnakeCase<T extends object>(input: readonly T[]): SnakeCaseKeys<T>[];
+export function toSnakeCase<T extends object>(
+	input: readonly T[],
+): SnakeCaseKeys<T>[];
 export function toSnakeCase<T extends object>(input: T): SnakeCaseKeys<T>;
 export function toSnakeCase(input: unknown): unknown {
 	if (isString(input)) {

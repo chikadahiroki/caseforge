@@ -51,7 +51,9 @@ function kebabCaseString(str: string): string {
  * @returns The kebab-case string or object.
  */
 export function toKebabCase<T extends string>(input: T): KebabCase<T>;
-export function toKebabCase<T extends object>(input: readonly T[]): KebabCaseKeys<T>[];
+export function toKebabCase<T extends object>(
+	input: readonly T[],
+): KebabCaseKeys<T>[];
 export function toKebabCase<T extends object>(input: T): KebabCaseKeys<T>;
 export function toKebabCase(input: unknown): unknown {
 	if (isString(input)) {

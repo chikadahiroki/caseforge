@@ -44,7 +44,9 @@ function camelCaseString(str: string): string {
  * @returns The camelCase string or object.
  */
 export function toCamelCase<T extends string>(input: T): CamelCase<T>;
-export function toCamelCase<T extends object>(input: readonly T[]): CamelCaseKeys<T>[];
+export function toCamelCase<T extends object>(
+	input: readonly T[],
+): CamelCaseKeys<T>[];
 export function toCamelCase<T extends object>(input: T): CamelCaseKeys<T>;
 export function toCamelCase(input: unknown): unknown {
 	if (isString(input)) {

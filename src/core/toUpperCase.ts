@@ -52,7 +52,9 @@ function upperCaseString(str: string): string {
  * @returns The UPPER_SNAKE_CASE string or object.
  */
 export function toUpperCase<T extends string>(input: T): UpperCase<T>;
-export function toUpperCase<T extends object>(input: readonly T[]): UpperCaseKeys<T>[];
+export function toUpperCase<T extends object>(
+	input: readonly T[],
+): UpperCaseKeys<T>[];
 export function toUpperCase<T extends object>(input: T): UpperCaseKeys<T>;
 export function toUpperCase(input: unknown): unknown {
 	if (isString(input)) {

@@ -1,4 +1,4 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { toSnakeCase } from "../../src/core/toSnakeCase";
 
 describe("toSnakeCase", () => {
@@ -31,5 +31,14 @@ describe("toSnakeCase", () => {
       const result = toSnakeCase(input);
       expect(result).toEqual({ user_info: { user_name: "John" } });
     });
+  });
+
+  it("returns non-string and non-object values as-is", () => {
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toSnakeCase(123)).toBe(123);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toSnakeCase(null)).toBe(null);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toSnakeCase(undefined)).toBe(undefined);
   });
 });

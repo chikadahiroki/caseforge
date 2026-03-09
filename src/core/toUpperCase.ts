@@ -6,7 +6,7 @@ import { isObject, isString } from "@/utils/typeGuards";
  * Converts a string to UPPER_SNAKE_CASE format at the type level.
  * @example "userName" -> "USER_NAME"
  */
-type UpperCase<
+export type UpperCase<
 	S extends string,
 	First extends boolean = true,
 > = S extends `${infer C}${infer R}`
@@ -23,7 +23,7 @@ type UpperCase<
  * Converts all object keys to UPPER_SNAKE_CASE format at the type level.
  * @example { userName: "John Doe" } -> { USER_NAME: "John Doe" }
  */
-type UpperCaseKeys<T> = {
+export type UpperCaseKeys<T> = {
 	[K in keyof T as UpperCase<K & string>]: T[K] extends readonly (infer U)[]
 		? U extends object
 			? readonly UpperCaseKeys<U>[]

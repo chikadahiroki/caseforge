@@ -42,4 +42,10 @@ describe("transformObject", () => {
 		const result = transformObject(input, upperCaseKey);
 		expect(result).toEqual({ NULLVALUE: null, UNDEFINEDVALUE: undefined });
 	});
+
+	it("preserves nested arrays", () => {
+		const input = { matrix: [[1, 2], [3, 4]] };
+		const result = transformObject(input, upperCaseKey);
+		expect(result).toEqual({ MATRIX: [[1, 2], [3, 4]] });
+	});
 });

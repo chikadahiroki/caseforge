@@ -6,7 +6,7 @@ import { isObject, isString } from "@/utils/typeGuards";
  * Converts a string to kebab-case format at the type level.
  * @example "userName" -> "user-name"
  */
-type KebabCase<
+export type KebabCase<
 	S extends string,
 	First extends boolean = true,
 > = S extends `${infer C}${infer R}`
@@ -23,7 +23,7 @@ type KebabCase<
  * Converts all object keys to kebab-case format at the type level.
  * @example { userName: "John Doe" } -> { "user-name": "John Doe" }
  */
-type KebabCaseKeys<T> = {
+export type KebabCaseKeys<T> = {
 	[K in keyof T as KebabCase<K & string>]: T[K] extends readonly (infer U)[]
 		? U extends object
 			? readonly KebabCaseKeys<U>[]

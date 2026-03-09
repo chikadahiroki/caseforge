@@ -1,4 +1,4 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { toCamelCase } from "../../src/core/toCamelCase";
 
 describe("toCamelCase", () => {
@@ -31,5 +31,14 @@ describe("toCamelCase", () => {
       const result = toCamelCase(input);
       expect(result).toEqual({ userInfo: { userName: "John" } });
     });
+  });
+
+  it("returns non-string and non-object values as-is", () => {
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toCamelCase(123)).toBe(123);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toCamelCase(null)).toBe(null);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toCamelCase(undefined)).toBe(undefined);
   });
 });

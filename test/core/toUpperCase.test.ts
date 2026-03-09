@@ -1,4 +1,4 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { toUpperCase } from "../../src/core/toUpperCase";
 
 describe("toUpperCase", () => {
@@ -31,5 +31,14 @@ describe("toUpperCase", () => {
       const result = toUpperCase(input);
       expect(result).toEqual({ USER_INFO: { USER_NAME: "John" } });
     });
+  });
+
+  it("returns non-string and non-object values as-is", () => {
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toUpperCase(123)).toBe(123);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toUpperCase(null)).toBe(null);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toUpperCase(undefined)).toBe(undefined);
   });
 });

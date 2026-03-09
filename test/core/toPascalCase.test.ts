@@ -1,4 +1,4 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { toPascalCase } from "../../src/core/toPascalCase";
 
 describe("toPascalCase", () => {
@@ -31,5 +31,14 @@ describe("toPascalCase", () => {
       const result = toPascalCase(input);
       expect(result).toEqual({ UserInfo: { UserName: "John" } });
     });
+  });
+
+  it("returns non-string and non-object values as-is", () => {
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toPascalCase(123)).toBe(123);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toPascalCase(null)).toBe(null);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toPascalCase(undefined)).toBe(undefined);
   });
 });

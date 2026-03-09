@@ -6,7 +6,7 @@ import { isObject, isString } from "@/utils/typeGuards";
  * Converts a string to snake_case format at the type level.
  * @example "userName" -> "user_name"
  */
-type SnakeCase<
+export type SnakeCase<
 	S extends string,
 	First extends boolean = true,
 > = S extends `${infer C}${infer R}`
@@ -23,7 +23,7 @@ type SnakeCase<
  * Converts all object keys to snake_case format at the type level.
  * @example { userName: "John Doe" } -> { user_name: "John Doe" }
  */
-type SnakeCaseKeys<T> = {
+export type SnakeCaseKeys<T> = {
 	[K in keyof T as SnakeCase<K & string>]: T[K] extends readonly (infer U)[]
 		? U extends object
 			? readonly SnakeCaseKeys<U>[]

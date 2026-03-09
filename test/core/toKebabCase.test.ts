@@ -1,4 +1,4 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { toKebabCase } from "../../src/core/toKebabCase";
 
 describe("toKebabCase", () => {
@@ -31,5 +31,14 @@ describe("toKebabCase", () => {
       const result = toKebabCase(input);
       expect(result).toEqual({ "user-info": { "user-name": "John" } });
     });
+  });
+
+  it("returns non-string and non-object values as-is", () => {
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toKebabCase(123)).toBe(123);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toKebabCase(null)).toBe(null);
+    // @ts-expect-error testing runtime behavior with invalid input
+    expect(toKebabCase(undefined)).toBe(undefined);
   });
 });

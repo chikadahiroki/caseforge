@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/caseforge.svg)](https://www.npmjs.com/package/caseforge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Coverage: 100%](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/chikadahiroki/caseforge)
 
 > Type-safe and lightweight case conversion library for TypeScript.
 

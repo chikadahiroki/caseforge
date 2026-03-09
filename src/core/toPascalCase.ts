@@ -6,19 +6,20 @@ import { isObject, isString } from "@/utils/typeGuards";
  * Converts a string to PascalCase format at the type level.
  * @example "user_name" -> "UserName"
  */
-type PascalCase<S extends string> = S extends `${infer Head}_${infer Tail}`
-	? `${Capitalize<Lowercase<Head>>}${PascalCase<Tail>}`
-	: S extends `${infer Head}-${infer Tail}`
+export type PascalCase<S extends string> =
+	S extends `${infer Head}_${infer Tail}`
 		? `${Capitalize<Lowercase<Head>>}${PascalCase<Tail>}`
-		: S extends `${infer First}${infer Rest}`
-			? `${Capitalize<First>}${Rest}`
-			: S;
+		: S extends `${infer Head}-${infer Tail}`
+			? `${Capitalize<Lowercase<Head>>}${PascalCase<Tail>}`
+			: S extends `${infer First}${infer Rest}`
+				? `${Capitalize<First>}${Rest}`
+				: S;
 
 /**
  * Converts all object keys to PascalCase format at the type level.
  * @example { user_name: "John Doe" } -> { UserName: "John Doe" }
  */
-type PascalCaseKeys<T> = {
+export type PascalCaseKeys<T> = {
 	[K in keyof T as PascalCase<K & string>]: T[K] extends readonly (infer U)[]
 		? U extends object
 			? readonly PascalCaseKeys<U>[]

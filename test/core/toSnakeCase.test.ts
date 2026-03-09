@@ -31,6 +31,12 @@ describe("toSnakeCase", () => {
       const result = toSnakeCase(input);
       expect(result).toEqual({ user_info: { user_name: "John" } });
     });
+
+    it("converts nested arrays", () => {
+      const input = [{ userName: "John" }, { userName: "Jane" }];
+      const result = toSnakeCase(input);
+      expect(result).toEqual([{ user_name: "John" }, { user_name: "Jane" }]);
+    });
   });
 
   it("returns non-string and non-object values as-is", () => {

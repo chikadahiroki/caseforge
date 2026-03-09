@@ -1,6 +1,6 @@
 import { PATTERNS } from "@/utils/patterns";
 import { transformObject } from "@/utils/transform";
-import { isObject, isString } from "@/utils/typeGuards";
+import { isArray, isObject, isString } from "@/utils/typeGuards";
 
 /**
  * Converts a string to UPPER_SNAKE_CASE format at the type level.
@@ -52,10 +52,16 @@ function upperCaseString(str: string): string {
  * @returns The UPPER_SNAKE_CASE string or object.
  */
 export function toUpperCase<T extends string>(input: T): UpperCase<T>;
+export function toUpperCase<T extends object>(input: readonly T[]): UpperCaseKeys<T>[];
 export function toUpperCase<T extends object>(input: T): UpperCaseKeys<T>;
 export function toUpperCase(input: unknown): unknown {
 	if (isString(input)) {
 		return upperCaseString(input);
+	}
+	if (isArray(input)) {
+		return input.map((item) =>
+			(toUpperCase as (input: unknown) => unknown)(item),
+		);
 	}
 	if (isObject(input)) {
 		return transformObject(input, upperCaseString);

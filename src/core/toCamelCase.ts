@@ -1,6 +1,6 @@
 import { PATTERNS } from "@/utils/patterns";
 import { transformObject } from "@/utils/transform";
-import { isObject, isString } from "@/utils/typeGuards";
+import { isArray, isObject, isString } from "@/utils/typeGuards";
 
 /**
  * Converts a string to camelCase format at the type level.
@@ -44,10 +44,16 @@ function camelCaseString(str: string): string {
  * @returns The camelCase string or object.
  */
 export function toCamelCase<T extends string>(input: T): CamelCase<T>;
+export function toCamelCase<T extends object>(input: readonly T[]): CamelCaseKeys<T>[];
 export function toCamelCase<T extends object>(input: T): CamelCaseKeys<T>;
 export function toCamelCase(input: unknown): unknown {
 	if (isString(input)) {
 		return camelCaseString(input);
+	}
+	if (isArray(input)) {
+		return input.map((item) =>
+			(toCamelCase as (input: unknown) => unknown)(item),
+		);
 	}
 	if (isObject(input)) {
 		return transformObject(input, camelCaseString);

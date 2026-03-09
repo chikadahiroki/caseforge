@@ -1,6 +1,6 @@
 import { PATTERNS } from "@/utils/patterns";
 import { transformObject } from "@/utils/transform";
-import { isObject, isString } from "@/utils/typeGuards";
+import { isArray, isObject, isString } from "@/utils/typeGuards";
 
 /**
  * Converts a string to snake_case format at the type level.
@@ -51,10 +51,16 @@ function snakeCaseString(str: string): string {
  * @returns The snake_case string or object.
  */
 export function toSnakeCase<T extends string>(input: T): SnakeCase<T>;
+export function toSnakeCase<T extends object>(input: readonly T[]): SnakeCaseKeys<T>[];
 export function toSnakeCase<T extends object>(input: T): SnakeCaseKeys<T>;
 export function toSnakeCase(input: unknown): unknown {
 	if (isString(input)) {
 		return snakeCaseString(input);
+	}
+	if (isArray(input)) {
+		return input.map((item) =>
+			(toSnakeCase as (input: unknown) => unknown)(item),
+		);
 	}
 	if (isObject(input)) {
 		return transformObject(input, snakeCaseString);

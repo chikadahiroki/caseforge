@@ -31,6 +31,12 @@ describe("toKebabCase", () => {
       const result = toKebabCase(input);
       expect(result).toEqual({ "user-info": { "user-name": "John" } });
     });
+
+    it("converts nested arrays", () => {
+      const input = [{ userName: "John" }, { userName: "Jane" }];
+      const result = toKebabCase(input);
+      expect(result).toEqual([{ "user-name": "John" }, { "user-name": "Jane" }]);
+    });
   });
 
   it("returns non-string and non-object values as-is", () => {

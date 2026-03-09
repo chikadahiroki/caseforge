@@ -31,6 +31,12 @@ describe("toPascalCase", () => {
       const result = toPascalCase(input);
       expect(result).toEqual({ UserInfo: { UserName: "John" } });
     });
+
+    it("converts nested arrays", () => {
+      const input = [{ user_name: "John" }, { user_name: "Jane" }];
+      const result = toPascalCase(input);
+      expect(result).toEqual([{ UserName: "John" }, { UserName: "Jane" }]);
+    });
   });
 
   it("returns non-string and non-object values as-is", () => {

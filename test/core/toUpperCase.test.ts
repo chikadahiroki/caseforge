@@ -31,6 +31,12 @@ describe("toUpperCase", () => {
       const result = toUpperCase(input);
       expect(result).toEqual({ USER_INFO: { USER_NAME: "John" } });
     });
+
+    it("converts nested arrays", () => {
+      const input = [{ userName: "John" }, { userName: "Jane" }];
+      const result = toUpperCase(input);
+      expect(result).toEqual([{ USER_NAME: "John" }, { USER_NAME: "Jane" }]);
+    });
   });
 
   it("returns non-string and non-object values as-is", () => {

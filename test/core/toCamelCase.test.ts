@@ -31,6 +31,12 @@ describe("toCamelCase", () => {
       const result = toCamelCase(input);
       expect(result).toEqual({ userInfo: { userName: "John" } });
     });
+
+    it("converts nested arrays", () => {
+      const input = [{ user_name: "John" }, { user_name: "Jane" }];
+      const result = toCamelCase(input);
+      expect(result).toEqual([{ userName: "John" }, { userName: "Jane" }]);
+    });
   });
 
   it("returns non-string and non-object values as-is", () => {

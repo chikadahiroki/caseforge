@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    check:
+      run: bun check
+    test:
+      run: bun test
+    build:
+      run: bun run build
+    outdated:
+      run: bun outdated || true

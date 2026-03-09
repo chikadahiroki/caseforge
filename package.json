@@ -30,9 +30,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "bun x tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node --minify",
+    "build": "bunx tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node --minify",
     "check": "bunx @biomejs/biome check --write src && bun x tsc --noEmit",
-    "prepublishOnly": "bun run check && bun test && bun run build",
     "release:patch:auto": "npm version patch && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",
     "release:minor:auto": "npm version minor && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",
     "release:major:auto": "npm version major && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes"
@@ -53,6 +52,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.6",
     "@types/bun": "^1.3.10",
+    "lefthook": "^2.1.3",
     "typescript": "^5.9.3"
   }
 }

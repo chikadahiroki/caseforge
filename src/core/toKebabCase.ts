@@ -1,6 +1,5 @@
 import { PATTERNS } from "@/utils/patterns";
-import { transformObject } from "@/utils/transform";
-import { isArray, isObject, isString } from "@/utils/typeGuards";
+import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to kebab-case format at the type level.
@@ -40,7 +39,7 @@ export type KebabCaseKeys<T> = {
  */
 function kebabCaseString(str: string): string {
 	return str
-		.replace(PATTERNS.UPPERCASE, (char) => `-${char.toLowerCase()}`)
+		.replace(PATTERNS.UPPER_CHAR, (char) => `-${char.toLowerCase()}`)
 		.replace(PATTERNS.CONSECUTIVE_SEPARATORS, "-")
 		.replace(PATTERNS.EDGE_SEPARATORS, "");
 }
@@ -56,16 +55,5 @@ export function toKebabCase<T extends object>(
 ): KebabCaseKeys<T>[];
 export function toKebabCase<T extends object>(input: T): KebabCaseKeys<T>;
 export function toKebabCase(input: unknown): unknown {
-	if (isString(input)) {
-		return kebabCaseString(input);
-	}
-	if (isArray(input)) {
-		return input.map((item) =>
-			(toKebabCase as (input: unknown) => unknown)(item),
-		);
-	}
-	if (isObject(input)) {
-		return transformObject(input, kebabCaseString);
-	}
-	return input;
+	return convertInput(input, kebabCaseString);
 }

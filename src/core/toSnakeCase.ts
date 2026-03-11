@@ -1,6 +1,5 @@
 import { PATTERNS } from "@/utils/patterns";
-import { transformObject } from "@/utils/transform";
-import { isArray, isObject, isString } from "@/utils/typeGuards";
+import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to snake_case format at the type level.
@@ -40,7 +39,7 @@ export type SnakeCaseKeys<T> = {
  */
 function snakeCaseString(str: string): string {
 	return str
-		.replace(PATTERNS.UPPERCASE, (char) => `_${char.toLowerCase()}`)
+		.replace(PATTERNS.UPPER_CHAR, (char) => `_${char.toLowerCase()}`)
 		.replace(PATTERNS.CONSECUTIVE_SEPARATORS, "_")
 		.replace(PATTERNS.EDGE_SEPARATORS, "");
 }
@@ -56,16 +55,5 @@ export function toSnakeCase<T extends object>(
 ): SnakeCaseKeys<T>[];
 export function toSnakeCase<T extends object>(input: T): SnakeCaseKeys<T>;
 export function toSnakeCase(input: unknown): unknown {
-	if (isString(input)) {
-		return snakeCaseString(input);
-	}
-	if (isArray(input)) {
-		return input.map((item) =>
-			(toSnakeCase as (input: unknown) => unknown)(item),
-		);
-	}
-	if (isObject(input)) {
-		return transformObject(input, snakeCaseString);
-	}
-	return input;
+	return convertInput(input, snakeCaseString);
 }

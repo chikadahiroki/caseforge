@@ -1,6 +1,5 @@
 import { PATTERNS } from "@/utils/patterns";
-import { transformObject } from "@/utils/transform";
-import { isArray, isObject, isString } from "@/utils/typeGuards";
+import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to PascalCase format at the type level.
@@ -52,16 +51,5 @@ export function toPascalCase<T extends object>(
 ): PascalCaseKeys<T>[];
 export function toPascalCase<T extends object>(input: T): PascalCaseKeys<T>;
 export function toPascalCase(input: unknown): unknown {
-	if (isString(input)) {
-		return pascalCaseString(input);
-	}
-	if (isArray(input)) {
-		return input.map((item) =>
-			(toPascalCase as (input: unknown) => unknown)(item),
-		);
-	}
-	if (isObject(input)) {
-		return transformObject(input, pascalCaseString);
-	}
-	return input;
+	return convertInput(input, pascalCaseString);
 }

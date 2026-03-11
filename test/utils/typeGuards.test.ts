@@ -1,5 +1,10 @@
-import { describe, it, expect } from "bun:test";
-import { isString, isArray, isObject, isBuiltIn } from "../../src/utils/typeGuards";
+import { describe, expect, it } from "bun:test";
+import {
+	isArray,
+	isBuiltIn,
+	isObject,
+	isString,
+} from "../../src/utils/typeGuards";
 
 describe("typeGuards", () => {
 	describe("isString", () => {

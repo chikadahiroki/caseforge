@@ -1,4 +1,27 @@
-import { isArray, isBuiltIn, isObject } from "./typeGuards";
+import { isArray, isBuiltIn, isObject, isString } from "./typeGuards";
+
+/**
+ * Converts an unknown value to the desired case.
+ * @param input - The input value to convert.
+ * @param convertString - Function to convert a string to the desired case.
+ * @returns The converted value.
+ */
+export function convertInput(
+	input: unknown,
+	convertString: (str: string) => string,
+): unknown {
+	if (isString(input)) {
+		return convertString(input);
+	}
+	if (isArray(input)) {
+		return input.map((item) => convertInput(item, convertString));
+	}
+	if (isObject(input)) {
+		return transformObject(input, convertString);
+	}
+
+	return input;
+}
 
 /**
  * Generic object key transformation.
@@ -18,11 +41,7 @@ export function transformObject<T>(
 		if (isBuiltIn(value)) {
 			result[newKey] = value;
 		} else if (isArray(value)) {
-			result[newKey] = value.map((item) =>
-				isObject(item) && !isArray(item)
-					? transformObject(item, transformKey)
-					: item,
-			);
+			result[newKey] = value.map((item) => convertInput(item, transformKey));
 		} else if (isObject(value)) {
 			result[newKey] = transformObject(value, transformKey);
 		} else {

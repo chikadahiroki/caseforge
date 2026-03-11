@@ -1,58 +1,58 @@
 {
-  "name": "caseforge",
-  "version": "0.5.2",
-  "description": "caseforge - Effortlessly convert between snake_case, camelCase, and more in TypeScript. Zero dependencies, type-safe, and easy to use for any project.",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chikadahiroki/caseforge.git"
-  },
-  "bugs": {
-    "url": "https://github.com/chikadahiroki/caseforge/issues"
-  },
-  "homepage": "https://github.com/chikadahiroki/caseforge#readme",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
-    }
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "scripts": {
-    "build": "bunx tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node --minify",
-    "check": "bunx @biomejs/biome check --write src && bun x tsc --noEmit",
-    "release:patch:auto": "npm version patch && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",
-    "release:minor:auto": "npm version minor && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",
-    "release:major:auto": "npm version major && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes"
-  },
-  "keywords": [
-    "typescript",
-    "caseforge",
-    "case-conversion",
-    "camelcase",
-    "snake-case",
-    "kebab-case",
-    "type-safe",
-    "utility",
-    "transform"
-  ],
-  "author": "Chikada Hiroki",
-  "license": "MIT",
-  "devDependencies": {
-    "@biomejs/biome": "2.4.6",
-    "@types/bun": "^1.3.10",
-    "lefthook": "^2.1.3",
-    "typescript": "^5.9.3"
-  }
+	"name": "caseforge",
+	"version": "0.5.2",
+	"description": "caseforge - Effortlessly convert between snake_case, camelCase, and more in TypeScript. Zero dependencies, type-safe, and easy to use for any project.",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chikadahiroki/caseforge.git"
+	},
+	"bugs": {
+		"url": "https://github.com/chikadahiroki/caseforge/issues"
+	},
+	"homepage": "https://github.com/chikadahiroki/caseforge#readme",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
+		}
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "bunx tsc --emitDeclarationOnly && bun build src/index.ts --outdir dist --target node --minify",
+		"check": "bunx @biomejs/biome check --write && bun x tsc --noEmit",
+		"release:patch:auto": "npm version patch && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",
+		"release:minor:auto": "npm version minor && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes",
+		"release:major:auto": "npm version major && git push && git push --tags && gh release create v$(node -p 'require(\"./package.json\").version') --generate-notes"
+	},
+	"keywords": [
+		"typescript",
+		"caseforge",
+		"case-conversion",
+		"camelcase",
+		"snake-case",
+		"kebab-case",
+		"type-safe",
+		"utility",
+		"transform"
+	],
+	"author": "Chikada Hiroki",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.6",
+		"@types/bun": "^1.3.10",
+		"lefthook": "^2.1.3",
+		"typescript": "^5.9.3"
+	}
 }

@@ -1,9 +1,9 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import {
 	isCamelCase,
-	isSnakeCase,
 	isKebabCase,
 	isPascalCase,
+	isSnakeCase,
 	isUpperCase,
 } from "../../src/utils/caseGuards";
 

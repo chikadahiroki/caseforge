@@ -5,8 +5,8 @@ export const PATTERNS = {
 	/** Matches a leading uppercase letter */
 	LEADING_UPPER: /^[A-Z]/,
 
-	/** Matches all uppercase letters */
-	UPPERCASE: /[A-Z]/g,
+	/** Matches a single uppercase letter */
+	UPPER_CHAR: /[A-Z]/g,
 
 	/** Matches a leading lowercase letter */
 	LEADING_LOWER: /^[a-z]/,
@@ -33,5 +33,5 @@ export const PATTERNS = {
 	SNAKE_CASE: /^[a-z][a-z0-9_]*$/,
 
 	/** Matches a complete UPPER_SNAKE_CASE string */
-	UPPER_SNAKE_CASE: /^[A-Z][A-Z0-9_]*$/,
+	UPPER_CASE: /^[A-Z][A-Z0-9_]*$/,
 } as const;

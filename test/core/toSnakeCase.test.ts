@@ -17,6 +17,23 @@ describe("toSnakeCase", () => {
 			expect(toSnakeCase("user-id")).toBe("user_id");
 			expect(toSnakeCase("user-name")).toBe("user_name");
 		});
+
+		describe("acronym handling", () => {
+			it("converts UPPER_CASE with acronyms to snake_case", () => {
+				expect(toSnakeCase("HTML_PARSER")).toBe("html_parser");
+				expect(toSnakeCase("API_KEY")).toBe("api_key");
+			});
+
+			it("converts PascalCase with acronyms to snake_case", () => {
+				expect(toSnakeCase("HTMLParser")).toBe("html_parser");
+				expect(toSnakeCase("XMLHttpRequest")).toBe("xml_http_request");
+			});
+
+			it("converts camelCase with acronyms to snake_case", () => {
+				expect(toSnakeCase("getAPIResponse")).toBe("get_api_response");
+				expect(toSnakeCase("parseHTML")).toBe("parse_html");
+			});
+		});
 	});
 
 	describe("object conversion", () => {

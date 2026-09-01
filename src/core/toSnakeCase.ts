@@ -1,22 +1,11 @@
-import { PATTERNS } from "@/utils/patterns";
+import { type JoinSnake, type SplitWords, splitWords } from "@/utils/tokenizer";
 import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to snake_case format at the type level.
  * @example "userName" -> "user_name"
  */
-export type SnakeCase<
-	S extends string,
-	First extends boolean = true,
-> = S extends `${infer C}${infer R}`
-	? C extends "_" | "-"
-		? `_${SnakeCase<R, false>}`
-		: C extends Uppercase<C>
-			? First extends true
-				? `${Lowercase<C>}${SnakeCase<R, false>}`
-				: `_${Lowercase<C>}${SnakeCase<R, false>}`
-			: `${C}${SnakeCase<R, false>}`
-	: S;
+export type SnakeCase<S extends string> = JoinSnake<SplitWords<S>>;
 
 /**
  * Converts all object keys to snake_case format at the type level.
@@ -38,10 +27,8 @@ export type SnakeCaseKeys<T> = {
  * @returns The snake_case string.
  */
 function snakeCaseString(str: string): string {
-	return str
-		.replace(PATTERNS.UPPER_CHAR, (char) => `_${char.toLowerCase()}`)
-		.replace(PATTERNS.CONSECUTIVE_SEPARATORS, "_")
-		.replace(PATTERNS.EDGE_SEPARATORS, "");
+	const words = splitWords(str);
+	return words.length === 0 ? str : words.join("_");
 }
 
 /**

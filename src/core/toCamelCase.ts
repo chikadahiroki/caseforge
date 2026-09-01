@@ -1,15 +1,11 @@
-import { PATTERNS } from "@/utils/patterns";
+import { type JoinCamel, type SplitWords, splitWords } from "@/utils/tokenizer";
 import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to camelCase format at the type level.
  * @example "user_name" -> "userName"
  */
-export type CamelCase<S extends string> = S extends `${infer A}_${infer B}`
-	? `${Lowercase<A>}${Capitalize<CamelCase<B>>}`
-	: S extends `${infer A}-${infer B}`
-		? `${Lowercase<A>}${Capitalize<CamelCase<B>>}`
-		: Uncapitalize<S>;
+export type CamelCase<S extends string> = JoinCamel<SplitWords<S>>;
 
 /**
  * Converts all object keys to camelCase format at the type level.
@@ -31,10 +27,12 @@ export type CamelCaseKeys<T> = {
  * @returns The camelCase string.
  */
 function camelCaseString(str: string): string {
-	return str
-		.replace(PATTERNS.LEADING_UPPER, (char) => char.toLowerCase())
-		.replace(PATTERNS.SEPARATOR_WITH_CHAR, (_, char) => char.toUpperCase())
-		.replace(PATTERNS.EDGE_SEPARATORS, "");
+	const words = splitWords(str);
+	const [first, ...rest] = words;
+	if (first === undefined) return str;
+	return (
+		first + rest.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join("")
+	);
 }
 
 /**

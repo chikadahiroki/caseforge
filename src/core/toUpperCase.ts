@@ -1,22 +1,11 @@
-import { PATTERNS } from "@/utils/patterns";
+import { type JoinUpper, type SplitWords, splitWords } from "@/utils/tokenizer";
 import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to UPPER_SNAKE_CASE format at the type level.
  * @example "userName" -> "USER_NAME"
  */
-export type UpperCase<
-	S extends string,
-	First extends boolean = true,
-> = S extends `${infer C}${infer R}`
-	? C extends "_" | "-"
-		? `_${UpperCase<R, false>}`
-		: C extends Uppercase<C>
-			? First extends true
-				? `${Uppercase<C>}${UpperCase<R, false>}`
-				: `_${Uppercase<C>}${UpperCase<R, false>}`
-			: `${Uppercase<C>}${UpperCase<R, false>}`
-	: Uppercase<S>;
+export type UpperCase<S extends string> = JoinUpper<SplitWords<S>>;
 
 /**
  * Converts all object keys to UPPER_SNAKE_CASE format at the type level.
@@ -38,11 +27,8 @@ export type UpperCaseKeys<T> = {
  * @returns The UPPER_SNAKE_CASE string.
  */
 function upperCaseString(str: string): string {
-	return str
-		.replace(PATTERNS.UPPER_CHAR, (char) => `_${char.toLowerCase()}`)
-		.replace(PATTERNS.CONSECUTIVE_SEPARATORS, "_")
-		.replace(PATTERNS.EDGE_SEPARATORS, "")
-		.toUpperCase();
+	const words = splitWords(str);
+	return words.length === 0 ? str : words.join("_").toUpperCase();
 }
 
 /**

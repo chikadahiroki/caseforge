@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"rootDir": "./src",
 		"outDir": "./dist",
 		"declaration": true,
 		"declarationMap": false,
@@ -21,9 +22,9 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
+		"types": ["bun"],
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": ["./src/*"]
 		}
 	},
 	"include": ["src/**/*"],

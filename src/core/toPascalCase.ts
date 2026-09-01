@@ -1,18 +1,15 @@
-import { PATTERNS } from "@/utils/patterns";
+import {
+	type JoinPascal,
+	type SplitWords,
+	splitWords,
+} from "@/utils/tokenizer";
 import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to PascalCase format at the type level.
  * @example "user_name" -> "UserName"
  */
-export type PascalCase<S extends string> =
-	S extends `${infer Head}_${infer Tail}`
-		? `${Capitalize<Lowercase<Head>>}${PascalCase<Tail>}`
-		: S extends `${infer Head}-${infer Tail}`
-			? `${Capitalize<Lowercase<Head>>}${PascalCase<Tail>}`
-			: S extends `${infer First}${infer Rest}`
-				? `${Capitalize<First>}${Rest}`
-				: S;
+export type PascalCase<S extends string> = JoinPascal<SplitWords<S>>;
 
 /**
  * Converts all object keys to PascalCase format at the type level.
@@ -34,10 +31,9 @@ export type PascalCaseKeys<T> = {
  * @returns The PascalCase string.
  */
 function pascalCaseString(str: string): string {
-	return str
-		.replace(PATTERNS.SEPARATOR_WITH_CHAR, (_, char) => char.toUpperCase())
-		.replace(PATTERNS.EDGE_SEPARATORS, "")
-		.replace(PATTERNS.LEADING_LOWER, (char) => char.toUpperCase());
+	const words = splitWords(str);
+	if (words.length === 0) return str;
+	return words.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join("");
 }
 
 /**

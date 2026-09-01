@@ -17,6 +17,23 @@ describe("toUpperCase", () => {
 			expect(toUpperCase("user_id")).toBe("USER_ID");
 			expect(toUpperCase("user_name")).toBe("USER_NAME");
 		});
+
+		describe("acronym handling", () => {
+			it("converts UPPER_CASE with acronyms to UPPER_SNAKE_CASE", () => {
+				expect(toUpperCase("HTML_PARSER")).toBe("HTML_PARSER");
+				expect(toUpperCase("API_KEY")).toBe("API_KEY");
+			});
+
+			it("converts PascalCase with acronyms to UPPER_SNAKE_CASE", () => {
+				expect(toUpperCase("HTMLParser")).toBe("HTML_PARSER");
+				expect(toUpperCase("XMLHttpRequest")).toBe("XML_HTTP_REQUEST");
+			});
+
+			it("converts camelCase with acronyms to UPPER_SNAKE_CASE", () => {
+				expect(toUpperCase("getAPIResponse")).toBe("GET_API_RESPONSE");
+				expect(toUpperCase("parseHTML")).toBe("PARSE_HTML");
+			});
+		});
 	});
 
 	describe("object conversion", () => {

@@ -17,6 +17,23 @@ describe("toPascalCase", () => {
 			expect(toPascalCase("userId")).toBe("UserId");
 			expect(toPascalCase("userName")).toBe("UserName");
 		});
+
+		describe("acronym handling", () => {
+			it("converts UPPER_CASE with acronyms to PascalCase", () => {
+				expect(toPascalCase("HTML_PARSER")).toBe("HtmlParser");
+				expect(toPascalCase("API_KEY")).toBe("ApiKey");
+			});
+
+			it("converts PascalCase with acronyms to normalized PascalCase", () => {
+				expect(toPascalCase("HTMLParser")).toBe("HtmlParser");
+				expect(toPascalCase("XMLHttpRequest")).toBe("XmlHttpRequest");
+			});
+
+			it("converts camelCase with acronyms to PascalCase", () => {
+				expect(toPascalCase("getAPIResponse")).toBe("GetApiResponse");
+				expect(toPascalCase("parseHTML")).toBe("ParseHtml");
+			});
+		});
 	});
 
 	describe("object conversion", () => {

@@ -17,6 +17,23 @@ describe("toKebabCase", () => {
 			expect(toKebabCase("user_id")).toBe("user-id");
 			expect(toKebabCase("user_name")).toBe("user-name");
 		});
+
+		describe("acronym handling", () => {
+			it("converts UPPER_CASE with acronyms to kebab-case", () => {
+				expect(toKebabCase("HTML_PARSER")).toBe("html-parser");
+				expect(toKebabCase("API_KEY")).toBe("api-key");
+			});
+
+			it("converts PascalCase with acronyms to kebab-case", () => {
+				expect(toKebabCase("HTMLParser")).toBe("html-parser");
+				expect(toKebabCase("XMLHttpRequest")).toBe("xml-http-request");
+			});
+
+			it("converts camelCase with acronyms to kebab-case", () => {
+				expect(toKebabCase("getAPIResponse")).toBe("get-api-response");
+				expect(toKebabCase("parseHTML")).toBe("parse-html");
+			});
+		});
 	});
 
 	describe("object conversion", () => {

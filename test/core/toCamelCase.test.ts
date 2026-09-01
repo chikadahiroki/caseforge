@@ -17,6 +17,23 @@ describe("toCamelCase", () => {
 			expect(toCamelCase("UserId")).toBe("userId");
 			expect(toCamelCase("UserName")).toBe("userName");
 		});
+
+		describe("acronym handling", () => {
+			it("converts UPPER_CASE with acronyms to camelCase", () => {
+				expect(toCamelCase("HTML_PARSER")).toBe("htmlParser");
+				expect(toCamelCase("API_KEY")).toBe("apiKey");
+			});
+
+			it("converts PascalCase with acronyms to camelCase", () => {
+				expect(toCamelCase("HTMLParser")).toBe("htmlParser");
+				expect(toCamelCase("XMLHttpRequest")).toBe("xmlHttpRequest");
+			});
+
+			it("converts camelCase with acronyms to normalized camelCase", () => {
+				expect(toCamelCase("getAPIResponse")).toBe("getApiResponse");
+				expect(toCamelCase("parseHTML")).toBe("parseHtml");
+			});
+		});
 	});
 
 	describe("object conversion", () => {

@@ -1,22 +1,11 @@
-import { PATTERNS } from "@/utils/patterns";
+import { type JoinKebab, type SplitWords, splitWords } from "@/utils/tokenizer";
 import { convertInput } from "@/utils/transform";
 
 /**
  * Converts a string to kebab-case format at the type level.
  * @example "userName" -> "user-name"
  */
-export type KebabCase<
-	S extends string,
-	First extends boolean = true,
-> = S extends `${infer C}${infer R}`
-	? C extends "_"
-		? `-${KebabCase<R, false>}`
-		: C extends Uppercase<C>
-			? First extends true
-				? `${Lowercase<C>}${KebabCase<R, false>}`
-				: `-${Lowercase<C>}${KebabCase<R, false>}`
-			: `${C}${KebabCase<R, false>}`
-	: S;
+export type KebabCase<S extends string> = JoinKebab<SplitWords<S>>;
 
 /**
  * Converts all object keys to kebab-case format at the type level.
@@ -38,10 +27,8 @@ export type KebabCaseKeys<T> = {
  * @returns The kebab-case string.
  */
 function kebabCaseString(str: string): string {
-	return str
-		.replace(PATTERNS.UPPER_CHAR, (char) => `-${char.toLowerCase()}`)
-		.replace(PATTERNS.CONSECUTIVE_SEPARATORS, "-")
-		.replace(PATTERNS.EDGE_SEPARATORS, "");
+	const words = splitWords(str);
+	return words.length === 0 ? str : words.join("-");
 }
 
 /**
